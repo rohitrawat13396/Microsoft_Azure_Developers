@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+
+    "parameters": {
+        "param_storagename": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 20
+        }
+    },
+
+    "variables": {
+        "var_storagename1": "[concat(parameters('param_storagename'),'1')]",
+        "var_storagename2": "[concat(parameters('param_storagename'),'2')]"
+    },
+
+    "resources": 
+    [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('var_storagename1')]",
+            "location": "East US 2",
+            "apiVersion": "2019-06-01",
+
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "properties": {
+                "accessTier": "Hot"
+            }
+        },
+
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('var_storagename2')]",
+            "location": "East US 2",
+            "apiVersion": "2019-06-01",
+
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "properties": {
+                "accessTier": "Hot"
+            }
+        }
+        
+    ]
+}
