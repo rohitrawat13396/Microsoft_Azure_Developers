@@ -1,0 +1,128 @@
+Azure App Service Plan (ASP)
+	- Underlying infrastructure (it can have 1 VM or more than 1 VM)
+	- PaaS, no infra mgmt
+	- No RDP
+	- NO changes can be done to the underlying infra
+
+	- ACU
+		- Azure Compute Units
+		- ACU is a combination of CPU/IOPS/Network bandwidth
+		- 100 ACUs ~ 1 core
+		- This is config of 1 machine only.
+		- You only pay for ASP that you have selected
+			- You can create any number of App Services on top of ASP. But you only pay for ASP
+
+	- If you create an ASP, you start paying for it, even if you are not using it.
+
+Steps
+------
+1. Create App Service Plan
+2. Create App Service (web app) on top of ASP
+3. Create an actual web app on local machine
+4. Deploy your app into App Service
+
+Exercise
+ - Block your own IP address in the App service, so you can't access the site
+
+
+Deployment Slot
+-------------------
+- Copy of production slot
+- If you have a newer version of the app
+	- you can first deploy it to the deployment slot
+	- do basic (sanity) testing of app in the deployment slot
+	- If everything is ok, then move the new app to production
+
+
+Benefits
+	- Minimal downtime (maintenance window is very small)
+	- Easy transition from one app version to other
+	- Warm up
+		- Whenever you deploy in prod, the first user who hits the url gets a slow response
+		- Why? Bcoz your app files are not yet loaded in the memory
+		- If u use dep slots, the app is already loaded in the slot (staging)
+		- And when u do swap, the app is loaded in the memory, so first user will not get any lag
+	- Rollback
+		- Swap again
+
+Traffic %
+-----------
+A/B Testing
+
+- Let me move a small percentage of users to the new version of app (staging deployment slot)
+
+- Even though are using the production URL (netcomfirstwebapp.azurewebsites.net), but a %age of the users will see the site present in staging slot.
+
+- Redirecting some of the traffic to a slot.
+
+
+Scaling on ASP
+--------
+Scale-up
+	- ANy time you try to upgrade a machine, it will delete the existing one and create a new one
+	- All infra in Azure is IMMUTABLE - once created, it cannot be modified
+
+Scale-out/in
+	- Adding/removing machines from ASP
+	
+
+- Whenever you create an app, it will be deployed on ALL the instances
+- Along with the app, load balancer will also be deployed for that web app
+
+- Whenever you add a new instance (VM), all the apps will the deployed on that instance
+
+
+	- Scaling ways
+		- Manual scaling
+			- you simply increase/decrease the number of instances
+
+		- Auto scaling
+			- 
+
+Metrics
+	- They are numerical numbers
+	- Tells you state of your resources
+	- Azure is capturing it and storing this info
+	- Azure uses it for billing purposes and monitoring the resources
+	- Exposed it to us, and it is available to us for next 93 days.
+	- CPU%, memory%, disk read bytes, disk write bytes, network bandwidth
+	- Use these metric to monitor, scaling, alerts, background tasks etc.
+
+- Scaling
+	- If the average CPU% is greater than 60% over a period of 7 mins, then increase the count by 1. Once increased, wait for 3 mins before you start to check again.
+
+	- If the average CPU% is less than 20% over a period of 7 mins, then decrease the count by 1. Once decreased, wait for 3 mins before you start to check again.
+
+
+Exercise
+---------
+From 20-23 Aug EDT, we have a flash sale. I want 3 instances.
+And daily from 9AM to 3PM, business users come in, I want 2 VMs.
+Otherwise, if max Data in > 1GB over a period 7 mins, then increase count by 1, take a 6 min coffee break before checking again.
+
+
+
+	- If there are multiple instances, then individual average of every machine will be calculated. If all the machines are going above the threshold, then a new instance will be added
+
+	- Scaling based on a metric (Regular profile)
+	- Scaling based on specific instance count (Fixed profile)
+	- Scaling based on repeating specific days (Recurring profile)
+
+	- Order of evaluation
+		Fixed profile => Recurring profile => Regular profile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

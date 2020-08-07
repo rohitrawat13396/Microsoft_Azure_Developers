@@ -1,0 +1,79 @@
+Azure Functions
+	- Why?
+		- Only few functions
+			- Cleanup storage account
+			- Archive data in DB
+			- Send out a reminder to the team at 9AM everyday
+
+		- A proj with very less functions
+		- Utility fns - used across multiple projects
+		- Some activities are not running frequently, they run occassionally.
+
+		- If a file is uploaded into storage, I want to execute a function
+
+
+	- True serverless
+	- Function-as-a-service (FaaS)
+	- Micro-micro-services
+
+	- Dynamic scaling
+		- Only pay for it, when you need it. Save cost
+		- If req grows, you dont need to do any scaling. It scale dynamically.
+
+- Blog
+	- UNtil you are building a FB like site, Azure functions are almost free.
+
+- Function App
+	- No infra mgmt. PaaS service
+	- Runs on Azure App Services
+	- This means lot of features that you saw for App service are also available here
+		- Deployment slots
+		- Custom domain
+		- SSL
+		- Access Restrictions
+
+- 2 types of plans
+	- App Service PLan
+		- Either create a new ASP (but dont do it) or use an existing ASP
+		- There is default limit of 30 mins to the execution time of function
+		- There is no max limit to the execution time of function - configure it to run as long as you want
+		- No dynamic scaling
+
+	- Consumption Plan
+		- Number of executions * Amount of resources
+		- Default time for completion of fn - 5 mins
+		- Max time you can configure to complete the fn - 10 mins
+		- Dynamic scaling
+
+Two parts of a fn
+	- Trigger
+		- Http trigger, Timer trigger, Blob trigger, Queue trigger, service bus trigger...
+	- Action
+		- this is your code
+
+
+Bindings
+	- Input bindings
+		- Example - Before your function starts, you want to extract some data from storage account
+			  - Before your function starts, you want to extract some information from Cosmos DB
+
+		- One way to do this is to write the code inside your fn, that will connect to storage account, get the data and then you can use it.
+		- Or you can use input bindings
+			- You can get the data even before your fn execution starts.
+			- You dont have to write the code for extraction
+
+	- Output bindings
+		- There are times when you want to send out data to different services
+		- Example - if my processing is complete, i want to store a message in azure queue
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,90 @@
+Region (not a country!)
+	- east us, west us, east us 2, west us 2
+
+	- one or more datacenters
+	- you deploy your apps in a datacenter
+
+
+3-tier architecture
+	- Web Layer
+	- Middle Layer
+	- Data Layer
+
+Q. Can we create multiple NICs and attach to it a VM?
+A. Yes. VM will et multiple Pvt IP Addresses
+
+- Firewall
+	- It can be applied only at Virtual Network level
+	- Using this, you can handle inbound and outbound traffic
+
+- Network Security Group (NSG)
+	- Set of rules that can handle inbound and outbound traffic
+	- Can be applied at Subnet level or VM level
+
+- 4 possible configurations
+	- NSG at subnet level and NSG at VM level (Pro: Control, Con: Maintenance)
+	- NSG at subnet level but not at VM level (Control all VMs but no maintenance problems -MS recommends)
+	- No NSG at subnet level but NSG at VM level (too much of overhead to manage VMs)
+	- No NSG at subnet level and no NSG at VM Level (exposing VMs - no security)
+
+
+- To define IP range for Vnet/subnet - I need to use CIDR notation
+	- 10.0.0.0-10.0.0.255 => 10.0.0.0/24
+
+NSG (applied at VM)
+	- Inbound rule
+		- Source - External (user/app/load balancer/internet/ip address)
+		- Destination - VM
+
+	- Outbound rule
+		- Source - VM
+		- Destination - External
+
+Q. Block all the traffic coming from IP address - 170.170.0.0 to your VM
+A. Inbound rule
+	- Source - IP Address
+	- Destination - VM
+
+
+
+Default inbound values
+	- Src - Virtual network, Dest - VM
+		- Any traffic originating within VNet and hitting my VM is ALLOWED
+
+	- Src - Azure LB, Dest - VM
+		- - Any traffic originating from LB and hitting my VM is ALLOWED
+
+	- All rules combined together says - that any traffic from VNet or LB is allowed, else it is blocked
+
+Public IP Addresses:
+	- Dynamic
+		- When you create it, actually IP Address is not assigned to you
+		- ONly when you attach it to a resource (VM), then it will be assigned
+		- You dont pay for it until is attached to a resource
+		- If you restart your VM, then you may not get the same IP add back
+
+	- Static
+		- When you create it, IP address is assigned you.
+		- You will start paying as soon it is created
+		- Even if you restart VM, IP address will remain the same
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

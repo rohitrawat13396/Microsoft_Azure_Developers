@@ -1,0 +1,76 @@
+APIM
+	- Blank API
+		- You are starting a new proj.
+		- UI + API
+		- With APIM, you can create a blank API, define some operations, and then allow UI team to use these operations to do their development.
+
+
+https://netcomapim.azure-api.net/employeeapi/employees
+https://netcomapim.azure-api.net/customers-api/users/1
+
+
+https://netcomapim.azure-api.net/weather
+
+
+
+Mock API
+----------
+1. Create a new Blank API (Weather)
+	- API suffix, api name
+
+2. Create operations in the API
+	- GetWeather
+
+3. Test the operation and see the error (because there is no backend API available)
+
+4. In GetWeather operation -> Inbound processing -> Add Mock response -> 200 OK (app/json)
+	- Test as well to see you are getting 200 OK.
+
+(You can setup rate limits if you want, by using rate-limit inbound policy)
+
+5. In GetWeather operation -> Front-end -> Responses -> Add response (200 OK) 
+	-> Add representation -> Content-type (application/json) 
+	-> Sample (      { "currentweather": "25 deg" }          )
+
+6. Test and see sample response showing up
+
+
+Exercise
+-----------
+1. Import Azure Function 
+2. In the response, add a header - x-powered-by: netcom
+
+
+
+Product
+	- Bundle of APIs that are available to be consumed/subscribed
+	- 2 types
+		- Open product - Anyone can go and use it. No subscription required
+
+		- Protected product: Subscribe it to use it
+			- Doesnt require approval
+			- Does require approval
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

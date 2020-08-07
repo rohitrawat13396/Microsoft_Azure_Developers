@@ -1,0 +1,73 @@
+Service Bus
+	- Queue
+	
+	- Topic
+		- Subscriptions
+
+		- Sender sends out the message to a topic
+		- Topic will check the message and see if there are any properties which are available
+		- It will check the properties (P=1) and based on the it, it will push the message to a sub with filter P=1
+
+		- Sender connects to topic, while receiver connects to subscription
+
+	- Max msg size is 256KB in case of basic and standard tiers, and 1MB in case of premium tier
+
+	- Topic
+		- TTL
+			- If no one picks up the message by TTL, then message will be removed from the queue
+			- This is the upper limit
+
+		- DUplicate detection
+			- If the same message arrives within the duplicate detection window, it will be discarded.
+			- But the user will be informed that , YES, i have received your message
+
+		- Subscription
+			- Max delivery count - max number of times msg can be taken out frm the queue
+			- Lock Duration - time window in which acknowledgement must be received
+			- TTL
+				- Whichever is lower is applicable
+
+
+1. Go to labs
+2. Create a Service Bus namespace
+3. In SB namespace -> Create Topic (TTL, Duplicate detection, Paritioning)
+
+4. Topic -> Create subscription (create 2) - no filters here
+	- Check props (TTL, Max delivery count, lock duration etc.)
+
+5. Open the code -> ServiceBusSender (Nuget - Microsoft.Azure.ServiceBus)
+	- Fill up connection string (SB namespace -> Shared Access Policies -> New -> Copy connection string)
+
+6. Run to see if messages are available in subscriptions
+	- Then go and try adding messageid and check duplicate detection
+
+7. Create a new subscription and add a filter
+	ProcessWarehouse = 1
+
+8. Back to sender project -> Change to add property
+		- message.UserProperties.Add("ProcessWarehouse", 1);
+
+9. Run and see the effect. That's it!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

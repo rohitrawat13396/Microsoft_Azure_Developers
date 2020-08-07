@@ -1,0 +1,53 @@
+1. Go to Resource Group
+2. Click on Deployments
+3. CLick on deployment you have done
+4. Click on template, and that's your ARM template!
+
+For prod;
+1. Create ARM templates, run it in dev envt
+2. Check these ARM templates into source control
+3. Use DevOps pipelines to deploy it in staging/uat/prod
+
+4 mandatory props for res
+	- Type
+	- Name
+	- ApiVersion
+	- Location
+
+Resource Group Name
+	- You cant add that inside ARM template
+	- Why? One deployment happens only in 1 RG. 
+	- RG is passed when you are making a call to ARM
+
+Deployment
+	- via Powershell
+	- via Azure CLI (bash)
+	- via portal
+	- Visual Studio
+
+
+When you redeploy the same template
+	- First, it checks if the resource already in your res gp with the same name 
+		- If yes, then ignore that resource
+		- If no, create the resource
+
+	- Is it going to do an update?
+		- Configurable properties
+			- COnfigurable props will be updated
+
+		- Non-configurable properties
+			- Will not get updated
+
+		- Mandatory properties
+			- It will throw an error
+
+
+- copyIndex()
+
+
+
+
+
+
+
+

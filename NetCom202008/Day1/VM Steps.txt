@@ -1,0 +1,39 @@
+1. Create VNet (define IP Address Range) - 10.0.0.0/24
+
+2. Create subnets within VNet (Assign IP Add range - within VNet IP range) - 
+	- subnet1 - 10.0.0.0/26
+	- subnet2 - 10.0.0.64/26
+
+3. Create NSG
+	- No manual rules defined
+	- There are 3 inbound and 3 outbound rules avilable
+
+4. Attach/Associate the NSG to subnet
+	- NSG -> Subnets -> Associate -> Selected our subnet
+
+5. Create Public IP Address 
+	- - Ipv4/Ipv6, Dynamic/Static, SKU, DNS Label
+
+6. Create VM
+	- Add VM name, size, image
+	- Networking - vnet, subnet, public ip add (optional)
+	- Management: Off
+
+7. Do RDP
+	- VM -> Connect -> RDP  (this should not work)
+
+	- VM -> Networking -> Add inbound rule 
+     	   - Source - Any, Dest - Any, Port - 3389, Protocol - Any, Allow Access, Priority - 1000 Provide a name - OK
+
+	- VM -> Connect -> RDP -> Provide credentials (this should work)
+
+8. Exercise:
+	- Dont delete any existing rules. But now block the RDP access, using another inbound rule
+
+	(Source - Any, Dest - Any, Port - 3389, Protocol - Any, Deny Access, Priority - 900, Add name - OK)
+
+
+
+
+
+

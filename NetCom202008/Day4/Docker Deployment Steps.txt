@@ -1,0 +1,81 @@
+Lets go to the labs
+
+1. Create mvc proj (of course! create a new folder and go to it)
+	dotnet new mvc
+
+2. Build & run
+	dotnet build / dotnet run
+
+3. Open it in VS Code
+	code .
+
+[Cross check if Docker Desktop is running and you should see "Switch to Windows containers"]
+
+4. Install docker extension
+
+5. Cmd (Ctrl+Shift+P) -> Add Docker Files to Workspace
+	- Linux/Win - Linux
+	- App platform - ASP.NET Core
+	- POrt - 80
+	- Docker compose - No
+	=> This will create 1 single file called "Dockerfile"
+	=> It contains all instructions reqd to create container image for your app
+
+6. Create container image for you app
+	- docker build . -t netcomfirstdocker:v1
+	=> netcomfirstdocker is the name of your image
+	=> v1 is name of tag
+	=> It will download all the base images
+
+7. How to check downloaded images and your own image on the machine
+	- docker images
+
+[To see how to download an image, use "docker pull hello-world"]
+
+8. Run it locally
+	- docker run -d -p 9000:80 netcomfirstdocker:v1
+	=> App will run on localhost:9000, and pass the request to port 80 to app inside docker container
+	=> Use netcomfirstdocker:v1 image to create a container instance
+
+9. How to check if container is running
+	- docker container ls
+
+	=> To stop it => docker container stop {id}
+
+10. Create Azure Container Registry
+
+11. In ACR ->Access Keys -> Enable Admin Access
+	=> In order to use credentials to upload images
+	=> Copy - login server, username password
+
+12. Cmd -> login to ACR
+	- docker login --username <uname> --password <pwd> <login server>
+
+13. To push image to ACR (2 steps) - step 1
+	- docker tag <local image name> <remote img name>
+	=> docker tag netcomfirstdocker:v1 netcomcontainerregistry.azurecr.io/netcomfirstdocker:v1
+
+14. Step 2
+	- docker push <remote img name>
+	=> docker push netcomcontainerregistry.azurecr.io/netcomfirstdocker:v1
+
+15. Verify if uploaded 
+	=> ACR -> Repositories
+
+16. Create instance frm image, and run it in Azure Container Instance
+
+17. Deploy it to Azure App Service
+
+
+
+
+
+
+
+
+
+
+
+
+
+

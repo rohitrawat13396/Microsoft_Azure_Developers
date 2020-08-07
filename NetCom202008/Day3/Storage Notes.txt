@@ -1,0 +1,100 @@
+Azure Storage
+	- Blobs / Containers
+		- You can store any kind of files
+		- Uploading/downloading is very quick
+		- It also supports streaming
+
+	- Files
+		- SMB (Server Message Block) protocol. You can go and map it as a network drive on PC
+
+	- Queues
+		- Senders can send the message to queue, and receivers can pick it up. FIFO
+
+	- Tables
+		- NoSQL Database. Key-value store
+
+- When you create storage acc, you get 500 TB of space
+
+- Assume that cost is $10/TB per month. If you keep only 10 MB of data for 10 mins, you pay on pr-rata basis.
+- Network bandwidth 
+	- Ingress is free
+	- Egress is charged (in some cases it is free)
+
+
+- Blobs
+	- Container (doesnt have a folder structure)
+		- PUblic access level
+			- Private - not logged in -> no access
+			- Blob - You must have the URL of the file you want to access (read only mode and not logged in). You cannot see which other files are present inside the container.
+			- Container - Without logging in, you can go and see which files are present in the container, and read them.
+
+
+	- Snapshot
+		- Create snapshot - Its like a backup of your file. Its actually a pointer/ref to actual file
+		- Promote snapshot - it will replace the current file with the snapshot file
+		- Delete blob - First, delete the snapshots, then only you can delete the blob
+
+	- Data protection
+		- If you enable soft delete, the file will not be permanently deleted.
+		- Only after the retention period, the file will be deleted permanently.
+		- You can retrieve the file, but you cant retrieve the snapshots
+
+	- Acquire lease
+		- There are times when file can accidently deleted. Using lease, you can prevent accidental deletion
+		- Once you acquire lease, a key will be generated. And those who have the key can modify or delete the file
+		- If multiple people want to modify the file, one person can acquire the lease, and modify the file. Person can release/break the lease, then other people can modify the file.
+
+	- Access Keys
+		- Very powerful keys. It has full access to the storage account
+		- NEVER SHARE THE ACCESS KEYS
+		- Storage account level
+		- IN your apps, DO NOT USE Access Keys
+
+	- SAS - Shared Access Signatures
+		- You can create a SAS at the storage account level or at the individual blob level
+		- LImited right key
+		
+
+https://mbnetcom202008.blob.core.windows.net/container1/TestVideo.mp4?sp=r&st=2020-08-05T18:47:41Z&se=2020-08-08T02:47:41Z&spr=https&sv=2019-12-12&sr=b&sig=yf19je6U0PY1GBepfOqXOjuBc3wnnRjR7Z3kw9rZXr0%3D
+
+	- Max file size - 4.76TB
+
+- Hands-on
+- Hot/cool/archive
+- Replication strategies
+
+
+Example
+	- You have a report.
+	- For first month, lot of people frequently access the report
+	- After one month upto one year, people acess the report sometimes
+	- After one year, its rarely accessed. Infact its only reqd for govt audit purposes.
+
+Save cost and get good performance
+	- For the first month, you can store the file in HOt tier
+	- From 2nd month to 12th month, you can store the file in Cool Tier. You can MOVE the file from hot to cool.
+	- After 1 year, you can move the file to archive tier.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

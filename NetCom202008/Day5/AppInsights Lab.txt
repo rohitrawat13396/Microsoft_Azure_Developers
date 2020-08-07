@@ -1,0 +1,64 @@
+Steps
+-------
+1. Create APp Insights workspace and copy the Instrumentation Key
+
+2. Create a new folder and then web project
+	- dotnet new mvc
+
+3. Add nuget packages
+	- dotnet add package Microsoft.ApplicationInsights
+	- dotnet add package Microsoft.ApplicationInsights.AspNetCore
+	- dotnet add package Microsoft.ApplicationInsights.PerfCounterCollector
+
+4. Build project
+	- dotnet build
+
+5. Open in VS Code
+
+6. Go to Startup.cs file --> Remove the line => app.UseHttpsRedirection();
+
+7. Startup.cs => ConfigureServices method add => services.AddApplicationInsightsTelemetry();
+
+8. Go to appSettings.json and add on top
+	"ApplicationInsights": {
+		"InstrumentationKey": "<your instrumentation key>"
+	},
+
+9. Go to _ViewImports.cshtml file and add at the end:
+	@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+
+10. Go to _Layout.cshtml and add in head:
+	    @Html.Raw(JavaScriptSnippet.FullScript)
+	</head>  <= dont copy this, add line at end of header
+
+11. Run the application and check
+	- Live Stream, Users, Sessions, Events etc.
+
+12. Logs => new query => search *
+			| where $table == "browserTimings"
+			| order by timestamp
+
+13. Go to HomeController.cs and in Index()
+	
+	    // Import first
+	    using Microsoft.ApplicationInsights.Extensibility;
+	    using Microsoft.ApplicationInsights;
+
+	
+	    var config = TelemetryConfiguration.CreateDefault();
+            config.InstrumentationKey = "<your instrumentaion key>";
+
+            var client = new TelemetryClient(config);
+
+            // Text can go using trackevent
+            client.TrackEvent("Hey! I am in Home page");
+
+            // Redireting to other page can be done using trackpageview
+            // Metric info can go using TrackMetric
+
+            client.TrackMetric("LoadTime", 100);
+
+14. Logs => new query => search *
+			| where $table == "customEvents"
+			| order by timestamp
+

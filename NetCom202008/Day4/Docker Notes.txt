@@ -1,0 +1,72 @@
+Problem Statement:
+1. Want to deploy all apps on the same machine
+2. Ensure that app runs on every environment in a consistent manner. Something running fine in dev envt should run in uat/prod in the same way
+3. With multiple apps (microservices), managing all these apps with their config should not create lot of overhead
+
+
+Docker
+	- Containers is just a concept. I will package my application in a container
+	- Docker has implemented Containers concept
+	- Package the app as a Docker container
+	- Deploy docker  container on docker runtime
+
+- Two types
+	- Linux - If i create a linux container, it can run on any version/flavour of linux
+	- Windows - If i create a windows container, it can run on any version/flavour of Windows
+
+Container image / instance
+
+Container registry
+	- Central repo for storing container images (pvt or public)
+
+Azure Container Instances
+	- Service from MS that allows you to run container instances in the cloud, anywhere in Azure datacenter
+	- You need to specify what OS you need, how much RAM you need and how much cores you need.
+
+
+
+
+
+
+
+
+1. Created a web app
+2. Created Dockerfile (set of instructions to create container image for my app)
+3. Run command 'docker build' - read the instructions from Dockerfile and packaged the app as container image
+4. Run 'docker images' command to see if the image has been created or not
+5. I can run it locally - 'docker run'.
+6. Check if the app is running on the specified port number
+7. To check which containers are running, use 'docker container ls' command
+
+8. Created ACR. Enable admin and copy login server name, username, password
+
+9. Use 'docker login' command to login to ACR
+
+10. Use 'docker tag' to tag local image name with remote image name
+11. Use 'docker push' command to upload image to ACR
+
+12. Run it in Azure Container Instances
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

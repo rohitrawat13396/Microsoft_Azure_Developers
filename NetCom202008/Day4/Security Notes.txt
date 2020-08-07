@@ -1,0 +1,78 @@
+Azure Active Directory
+	- Subscriptions
+		- Resource Groups
+			- Resources
+
+
+RBAC (Role based access control)
+	- Entities
+		- Principal (User/group/AAD App)
+		- Role (owner, contributor, reader... + custom)
+		- Scope (Subscription / resource group / resource)
+
+AAD App
+	- Using this, you also perform Service Principal Authentication
+
+	- Service accounts?
+		- You create a new account, which is not a physical user
+		- It has a userid/account and it has a password
+		- You dont get locked out / password never expires
+		- No login
+		- You use it to run apps in production
+
+	- AAD Application
+		- It just like a user	
+		- It will have a userid/pwd
+		- No interactive logins
+		- It can access the resources (if you give access to AAD App on some resource)
+	   	 - For example: 
+			1. You create an AAD App
+			2. Give access to AAD App on a resource (storage)
+			3. You can use the credentials of that AAD App in your website/app to access storage
+
+	- Userid => Application id / client id		6babb6dc-968e-44b6-a21b-b7b5bb55dfb4
+	- Password => Client secret 			Ul~8pL.mjubYv0o52~iOP0c2d4_-Z78-_-
+
+	- Steps
+		- AAD -> App Registrations -> Register New -> Provide a name -> OK (will create your AAD App)
+		- Open your app -> Certificates and Secrets -> New client secret -> Add Desc -> Copy the secret
+
+Key Vault
+	- Service in Azure that allows you store all secrets/keys/certificates
+
+	- Why?
+		- Easier to find it later
+		- Logging and audit - who accessed the secret
+		- Securing all in one place
+		- Renewal is easy - if your app is using a pwd, and it expires, then you have to go to app config and change the password. But if you are storing everything in key vault, then if password expires, you can change it inkey vault. And you dont need to change the app
+
+		- If you checkin the code, your secrets/conn strings goes inside source control. They are trying to ensure that no secret is written inside the code.
+
+	- What?
+		- We are trying to get rid of all the secrets inside the code
+
+https://netcomkeyvault.vault.azure.net/secrets/MyPassword/
+
+
+1. Create AAD App
+2. Create Key Vault
+3. Give access to AAD App on the Key Vault
+4. Use the client id/secret in the web app to access key vault
+5. This should give back the conn string to the web app
+
+
+Managed Identities
+---------------------
+When you enable MI, an AAD App is created. For example - if you enable MI for App Service, AAD is created for App service.
+But this app is only tied to the service (App service) in which it is created
+
+1. Enable MSI on App service
+2. Giving access to AAD App of App service, on key vault
+3. Internally, it will use the client id/secret in the web app to access key vault
+5. This should give back the conn string to the web app
+
+
+
+
+
+

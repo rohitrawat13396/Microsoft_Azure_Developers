@@ -1,0 +1,32 @@
+1. Create App Service Plan
+	- Windows, ASP - S1
+
+2. Create App Service
+	- .NET Core, 3.1 version, WIndows, Select existing ASP
+	- Use the URL to see what is there - it should be empty
+
+3. Create a folder
+4. In cmd prompt, go to that folder.
+5. Create MVC app
+	- dotnet new mvc
+6. Build the app
+	- dotnet build
+
+7. Open us VS code
+	- code .
+
+8. Install the extension - Azure App Service
+9. Go to extension - it should show your account web apps.
+10. Select your web app -> Right click -> Deploy to web app
+11. Browse to URL to check if your app is deployed successfully
+
+
+
+12. Create a deployment slot (from portal). It should show in extension.
+13. Create a new version of app by modifying any web page. Then push it to deployment slot - from extension
+
+14. Then do the swap.
+15. Check the web app content before and after swapping.
+
+
+
